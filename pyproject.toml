@@ -1,0 +1,25 @@
+[project]
+name = "genesisv001"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "MuraKon2906", email = "mcray2906writes@gmail.com" }
+]
+requires-python = ">=3.12"
+dependencies = [
+    "google-genai>=1.30.0",
+    "python-dotenv>=1.1.1",
+]
+
+[project.scripts]
+genesisv001 = "genesisv001:main"
+
+[tool.maturin]
+module-name = "genesisv001._core"
+python-packages = ["genesisv001"]
+python-source = "src"
+
+[build-system]
+requires = ["maturin>=1.0,<2.0"]
+build-backend = "maturin"
