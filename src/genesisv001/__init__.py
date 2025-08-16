@@ -1,5 +1,4 @@
 import os
-from PIL import ImageFont
 from luma.core.interface.serial import spi
 from luma.oled.device import ssd1309
 from luma.core.render import canvas
