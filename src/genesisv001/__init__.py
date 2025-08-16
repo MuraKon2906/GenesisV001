@@ -1,6 +1,7 @@
 import os
 from genesisv001._core import hello_from_bin
 from genesisv001._core import genesis_translate
+from genesisv001._core import remove_gen_waste
 from dotenv import load_dotenv
 from google import genai
 
@@ -36,10 +37,25 @@ class Casy:
 
             """,
         )
-        print(schedule.text)
+        print(remove_gen_waste(schedule.text))
 
     def teleprompter(self):
-        pass
+        content = input("Enter the title of the speech : ")
+
+        script = client.models.generate_content(
+            model="gemini-2.5-flash-lite",
+            contents=f"""
+            {content} 
+            Generate a very concise, motivational, and engaging speech based strictly on the above content. 
+            The speech should be simple, and easy to deliver,make the speech upto 20 lines at least . 
+            Always start the output exactly with: 
+
+            "Here you go boss man:"
+
+            Do not add any extra text, disclaimers, or introductions beyond the requested speech. 
+            """,
+        )
+        print(remove_gen_waste(script.text))
 
 
 def main() -> None:
@@ -54,9 +70,3 @@ def main() -> None:
         inst.ai_scheduler()
     elif choice == 3:
         inst.teleprompter()
-    # print(genesis_translate(input="Hallo, mein Name ist Shaan, was ist dein?"))
-    # response = client.models.generate_content(
-    #     model="gemini-2.5-flash-lite",
-    #     contents=" Explain whats the mitochondria in one line",
-    # )
-    # print(response.text)
