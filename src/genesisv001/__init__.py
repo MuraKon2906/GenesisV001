@@ -1,4 +1,8 @@
 import os
+from PIL import ImageFont
+from luma.core.interface.serial import spi
+from luma.oled.device import ssd1309
+from luma.core.render import canvas
 from genesisv001._core import hello_from_bin
 from genesisv001._core import genesis_translate
 from genesisv001._core import remove_gen_waste
@@ -6,13 +10,31 @@ from dotenv import load_dotenv
 from google import genai
 
 load_dotenv()
+
+
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 client = genai.Client()
 
 
+class Display:
+    def __init__(self) -> None:
+        serial = spi(
+            device=0, port=0, gpio_DC=25, gpio_RST=27
+        )  # CE0=GPIO8, DC=GPIO25, RST=GPIO27
+        self.device = ssd1309(serial, width=128, height=64)
+
+    def draw(self, input):
+        with canvas(self.device) as draw:
+            draw.text((20, 20), input, fill="white")
+
+
 class Casy:
     def __init__(self) -> None:
-        pass
+        self.inst_display = Display()
+
+    def display_test(self, test_content):
+        inst = self.inst_display
+        inst.draw(input=test_content)
 
     def translation_app(self):
         while True:
@@ -70,3 +92,6 @@ def main() -> None:
         inst.ai_scheduler()
     elif choice == 3:
         inst.teleprompter()
+
+    display_test = "Hello Nandha !"
+    inst.display_test(test_content=display_test)
