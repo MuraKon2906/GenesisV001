@@ -2,7 +2,7 @@ use pyo3::prelude::*;
 use translators::{GoogleTranslator, Translator};
 #[pyfunction]
 fn hello_from_bin() -> String {
-    "Hello I am CASY. What can I do for you Buddy!".to_string()
+    "Hello I am CASY. What can I do for you Buddy \n 1. Translation \n 2. AI Productivity \n 3. Teleprompter!".to_string()
 }
 #[pyfunction]
 fn genesis_translate(input: &str) -> String {
