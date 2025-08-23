@@ -30,11 +30,11 @@ class Display:
 
 class Casy:
     def __init__(self) -> None:
-        self.inst_display = Display()
-
-    def display_test(self, test_content):
-        inst = self.inst_display
-        inst.draw(input=test_content)
+        # self.inst_display = Display()
+        pass
+        # def display_test(self, test_content):
+        #     inst = self.inst_display
+        #     inst.draw(input=test_content)
 
     def translation_app(self):
         while True:
@@ -93,5 +93,5 @@ def main() -> None:
     elif choice == 3:
         inst.teleprompter()
 
-    display_test = "Hello Nandha !"
-    inst.display_test(test_content=display_test)
+    # display_test = "Hello Nandha !"
+    # inst.display_test(test_content=display_test)
